@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_weight="10"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".ui.login.LoginActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:weightSum="10">
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:src="@drawable/ic_df_logo" />
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="45dp"
+            android:layout_marginRight="45dp"
+            android:layout_weight="6"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:weightSum="3">
+
+
+            <com.displayfort.feedback.widgets.EditextRegular
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/flat_them_bg"
+                android:drawableLeft="@mipmap/username_icon"
+                android:drawablePadding="25dp"
+                android:hint="Username"
+                android:inputType="textEmailAddress"
+                android:padding="10dp"
+                android:selectAllOnFocus="true"
+                android:textSize="16sp" />
+
+            <com.displayfort.feedback.widgets.EditextRegular
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/flat_them_bg"
+                android:drawableLeft="@mipmap/password_icon"
+                android:drawablePadding="25dp"
+                android:hint="@string/prompt_password"
+                android:imeActionLabel="@string/action_sign_in_short"
+                android:imeOptions="actionDone"
+                android:inputType="textPassword"
+                android:padding="10dp"
+                android:selectAllOnFocus="true"
+                android:textSize="16sp" />
+
+            <com.displayfort.feedback.widgets.ButtonRegular
+                android:id="@+id/login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:background="@drawable/button_them_bg"
+                android:paddingLeft="65dp"
+                android:paddingTop="10dp"
+                android:paddingRight="65dp"
+                android:paddingBottom="10dp"
+                android:text="LOGIN"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <com.displayfort.feedback.widgets.TextviewRegular
+                android:id="@+id/forgotTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginTop="15dp"
+                android:background="?selectableItemBackground"
+                android:gravity="right"
+                android:padding="12dp"
+                android:text="Forget Password"
+                android:textColor="@color/textColor"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:padding="15dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="fitStart"
+                android:src="@drawable/ic_customer_satisfaction" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="64dp"
+        android:visibility="gone" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/image_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/login_screen_bottom_image" />
+    </RelativeLayout>
+</LinearLayout>

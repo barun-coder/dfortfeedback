@@ -13,6 +13,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.displayfort.feedback.NrFtPrefrence;
+import com.displayfort.feedback.R;
+import com.displayfort.feedback.ui.splash.SplashActivity;
+import com.displayfort.feedback.utils.Dialogs;
+import com.displayfort.feedback.utils.Utility;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -33,12 +38,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
-
-import consulting.zolute.feedback.NrFtPrefrence;
-import consulting.zolute.feedback.R;
-import consulting.zolute.feedback.SplashActivity;
-import consulting.zolute.feedback.utils.Dialogs;
-import consulting.zolute.feedback.utils.Utility;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
