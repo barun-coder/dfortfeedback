@@ -2,6 +2,7 @@ package com.displayfort.feedback.widgets;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.support.v7.widget.AppCompatTextView;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
@@ -9,7 +10,7 @@ import android.widget.TextView;
  * Created by Husain on 17/09/2019 16:21.
  * DFFeedbackCode
  */
-public class TextviewMD extends TextView {
+public class TextviewMD extends AppCompatTextView {
 
     public TextviewMD(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);

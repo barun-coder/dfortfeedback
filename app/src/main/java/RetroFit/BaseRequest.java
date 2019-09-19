@@ -38,6 +38,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -302,36 +303,6 @@ public class BaseRequest<T> extends BaseRequestParser {
     };
     Call<JsonElement> callAPI;
 
-    public void callAPIGet(final int requestCode, String remainingURL) {
-        isAlreadyTaken = false;
-        RequestCode = requestCode;
-        showLoader();
-        Log.d("BaseReq", "Input URL : " + ApiClient.getClient().baseUrl() + remainingURL);
-        Call<ResponseBody> callStrAPI = apiInterface.getData(remainingURL, new NrFtPrefrence(mContext).getLoginSessionKey());
-        callStrAPI.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                hideLoader();
-                //response.body().string()
-                Utility.showLog("BIGRESPONSE:  " + response.toString());
-                try {
-                    requestReciever.onSuccess(RequestCode, response.body().string(), message, response.code());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                    requestReciever.onSuccess(RequestCode, "", message, response.code());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                hideLoader();
-                Utility.showLog("BIGRESPONSE:  " + t.toString());
-                requestReciever.onFailure(1, "" + mResponseCode, message);
-            }
-        });
-
-    }
-
 
     public void logFullResponse(String response, String inout) {
         final int chunkSize = 2000;
@@ -403,31 +374,31 @@ public class BaseRequest<T> extends BaseRequestParser {
     }
 
     public void showLoader() {
-        if (mContext != null && !((Activity) mContext).isDestroyed()) {
-
-            if (!runInBackground) {
-                if (null != loaderView) {
-                    loaderView.setVisibility(View.VISIBLE);
-                } else if (null != dialog) {
-                    dialog.show();
-                }
-            }
-        }
+//        if (mContext != null && !((Activity) mContext).isDestroyed()) {
+//
+//            if (!runInBackground) {
+//                if (null != loaderView) {
+//                    loaderView.setVisibility(View.VISIBLE);
+//                } else if (null != dialog) {
+//                    dialog.show();
+//                }
+//            }
+//        }
     }
 
     public void hideLoader() {
 
-        if (mContext != null && (mContext instanceof Activity) && !((Activity) mContext).isDestroyed()) {
-
-            if (!runInBackground) {
-                if (null != loaderView) {
-                    loaderView.setVisibility(View.GONE);
-                } else if (null != dialog) {
-                    dialog.dismiss();
-                    dialog.cancel();
-                }
-            }
-        }
+//        if (mContext != null && (mContext instanceof Activity) && !((Activity) mContext).isDestroyed()) {
+//
+//            if (!runInBackground) {
+//                if (null != loaderView) {
+//                    loaderView.setVisibility(View.GONE);
+//                } else if (null != dialog) {
+//                    dialog.dismiss();
+//                    dialog.cancel();
+//                }
+//            }
+//        }
 
 
     }
@@ -445,6 +416,7 @@ public class BaseRequest<T> extends BaseRequestParser {
     private static final String CONTENT_TYPE = "application/json";
     private static final String USER_AGENT = "";
     private HttpURLConnection mHttpURLConnection;
+
 
     public class MultipartConn {
         private HttpURLConnection httpURLConnection;
@@ -559,5 +531,18 @@ public class BaseRequest<T> extends BaseRequestParser {
         }
     }
 
+    public void callAPIPost(final int requestCode, JsonObject jsonObject, String remainingURL, String token_code) {
+        isAlreadyTaken = false;
+        RequestCode = requestCode;
+        showLoader();
+        if (jsonObject == null) {
+            jsonObject = new JsonObject();
+        }
+        Log.d("BaseReq", "Input URL : " + ApiClient.getClient().baseUrl() + remainingURL);
+        logFullResponse(jsonObject.toString(), "INPUT");
+        callAPI = apiInterface.postData(remainingURL, jsonObject, token_code);
+        callAPI.enqueue(responseCallback);
+
+    }
 
 }

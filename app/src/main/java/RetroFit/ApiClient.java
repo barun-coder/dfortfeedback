@@ -1,5 +1,6 @@
 package RetroFit;
 
+import com.displayfort.feedback.BuildConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -15,7 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiClient {
 
 
-    public static final String BASE_URL = "http://74.208.178.252/";
+    public static final String BASE_URL = BuildConfig.BASE_URL;
 
 
     private static Retrofit posting_APIClient = null;
