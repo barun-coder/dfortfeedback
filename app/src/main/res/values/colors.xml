@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#E3161D</color>
-    <color name="colorPrimaryDark">#E3161D</color>
+    <color name="colorPrimary">#F75666</color>
+    <color name="colorPrimaryDark">#F75666</color>
     <color name="colorAccent">#D81B60</color>
 
     <color name="theme_color">@color/colorPrimaryDark</color>
@@ -9,6 +9,8 @@
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="textColor">#3E394F</color>
+    <color name="textColorhint">#BDBEC7</color>
+    <color name="box">#B3B4B8</color>
     <color name="light_gray">#C8C8C8</color>
     <color name="gray">#919191</color>
     <color name="shadow">#d0d8dc</color>
