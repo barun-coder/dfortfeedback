@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.displayfort.feedback.ui.feedback.FeedBackActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.displayfort.feedback.ui.feedback.FeedBackViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:weightSum="7">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:weightSum="3">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/companyLogo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitStart"
+                        android:src="@drawable/ic_df_logo" />
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="right"
+                        android:background="?actionBarItemBackground"
+                        android:onClick="@{() -> viewModel.onLogout()}"
+                        android:padding="4dp"
+                        android:src="@mipmap/logout"
+                        android:tint="#FFFFFF" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_customer_satisfaction" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="5"
+                android:padding="4dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_above="@+id/shareTv"
+                        android:orientation="vertical"
+                        android:weightSum="2">
+
+                        <LinearLayout
+                            android:id="@+id/optionLL"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:weightSum="5">
+
+                            <RelativeLayout
+                                android:id="@+id/option1RL"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginLeft="4dp"
+                                android:layout_marginRight="4dp"
+                                android:layout_weight="1"
+                                android:background="@drawable/smiley_bg_selector"
+                                android:orientation="vertical"
+                                android:padding="4dp"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:id="@+id/image1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_above="@+id/feedtext1"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginBottom="4dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/smile" />
+
+                                <com.displayfort.feedback.widgets.TextviewRegular
+                                    android:id="@+id/feedtext1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:padding="2dp"
+                                    android:text="Answer"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="16sp" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/option2RL"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/smiley_bg_selector"
+                                android:orientation="vertical"
+                                android:padding="4dp"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:id="@+id/image2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_above="@+id/feedtext2"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginBottom="4dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/smile" />
+
+                                <com.displayfort.feedback.widgets.TextviewRegular
+                                    android:id="@+id/feedtext2"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:padding="2dp"
+                                    android:text="Answer"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="16sp" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/option3RL"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/smiley_bg_selector"
+                                android:orientation="vertical"
+                                android:padding="4dp"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:id="@+id/image3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_above="@+id/feedtext3"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginBottom="4dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/smile" />
+
+                                <com.displayfort.feedback.widgets.TextviewRegular
+                                    android:id="@+id/feedtext3"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:padding="2dp"
+                                    android:text="Answer"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="16sp" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/option4RL"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/smiley_bg_selector"
+                                android:orientation="vertical"
+                                android:padding="4dp"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:id="@+id/image4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_above="@+id/feedtext4"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginBottom="4dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/smile" />
+
+                                <com.displayfort.feedback.widgets.TextviewRegular
+                                    android:id="@+id/feedtext4"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:padding="2dp"
+                                    android:text="Answer"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="16sp" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:id="@+id/option5RL"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:background="@drawable/smiley_bg_selector"
+                                android:orientation="vertical"
+                                android:padding="4dp"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:id="@+id/image5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_above="@+id/feedtext5"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginBottom="4dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/smile" />
+
+                                <com.displayfort.feedback.widgets.TextviewRegular
+                                    android:id="@+id/feedtext5"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_centerHorizontal="true"
+                                    android:padding="2dp"
+                                    android:text="Answer"
+                                    android:textColor="@color/textColor"
+                                    android:textSize="16sp" />
+                            </RelativeLayout>
+
+
+                        </LinearLayout>
+
+                        <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_weight="1">
+
+                            <android.support.v7.widget.RecyclerView xmlns:tools="http://schemas.android.com/tools"
+                                android:id="@+id/departmentRecycleView"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:padding="10dp"
+                                android:visibility="gone"
+                                tools:itemCount="10"
+                                tools:layoutManager="android.support.v7.widget.GridLayoutManager"
+                                tools:listitem="@layout/item_feedback"
+                                tools:orientation="horizontal"
+                                tools:scrollbars="horizontal"
+                                tools:spanCount="4" />
+
+
+                            <ScrollView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:orientation="vertical">
+
+
+                                    <com.nex3z.flowlayout.FlowLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+                                        android:id="@+id/flowLayoutFl"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        app:flChildSpacing="8dp"
+                                        app:flChildSpacingForLastRow="align"
+                                        app:flRowSpacing="8dp">
+
+
+                                    </com.nex3z.flowlayout.FlowLayout>
+
+                                    <RelativeLayout
+                                        android:id="@+id/detailSV"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_horizontal"
+                                        android:background="@drawable/white_round_rect"
+                                        android:gravity="center_horizontal|center_vertical"
+                                        android:orientation="vertical"
+                                        android:padding="10dp"
+                                        android:visibility="gone">
+
+
+                                        <com.displayfort.feedback.widgets.EditextRegular
+                                            android:id="@+id/commentEt"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginBottom="10dp"
+                                            android:background="@drawable/edit_flat_them_bg"
+                                            android:gravity="top|left"
+                                            android:hint="Any Other Suggestion(Optional)"
+                                            android:lines="8"
+                                            android:maxLines="10"
+                                            android:minLines="4"
+                                            android:padding="6dp"
+                                            android:scrollbars="vertical"
+                                            android:textColor="#3E394F"
+                                            android:textColorHint="@color/textColorhint"
+                                            android:textSize="16sp" />
+
+                                        <com.displayfort.feedback.widgets.EditextRegular
+                                            android:id="@+id/mobileEt"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/commentEt"
+                                            android:layout_marginBottom="10dp"
+                                            android:background="@drawable/edit_flat_them_bg"
+                                            android:gravity="center_vertical"
+                                            android:hint="Contact No.(Optional)"
+                                            android:inputType="number"
+                                            android:maxLength="10"
+                                            android:padding="6dp"
+                                            android:textColor="#3E394F"
+                                            android:textColorHint="@color/textColorhint"
+                                            android:textSize="16sp" />
+
+                                        <com.displayfort.feedback.widgets.EditextRegular
+                                            android:id="@+id/emailIdEt"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_below="@+id/mobileEt"
+                                            android:layout_marginBottom="10dp"
+                                            android:layout_toLeftOf="@+id/cancel_btn"
+                                            android:background="@drawable/edit_flat_them_bg"
+                                            android:gravity="center_vertical"
+                                            android:hint="Email Id (Optional)"
+                                            android:inputType="textEmailAddress"
+                                            android:maxLength="40"
+                                            android:padding="6dp"
+                                            android:textColor="#3E394F"
+                                            android:textColorHint="@color/textColorhint"
+                                            android:textSize="16sp" />
+
+                                        <com.displayfort.feedback.widgets.ButtonRegular
+                                            android:id="@+id/cancel_btn"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="35dp"
+                                            android:layout_below="@+id/mobileEt"
+                                            android:layout_alignParentRight="true"
+                                            android:layout_marginLeft="15dp"
+                                            android:layout_marginTop="1dp"
+                                            android:layout_marginRight="0dp"
+                                            android:layout_marginBottom="18dp"
+                                            android:background="?actionBarItemBackground"
+                                            android:gravity="center_vertical|center_horizontal"
+                                            android:onClick="@{() -> viewModel.onCancel()}"
+                                            android:text="Cancel"
+                                            android:textColor="@color/colorPrimary"
+                                            android:textSize="16dp" />
+
+                                    </RelativeLayout>
+                                </LinearLayout>
+                            </ScrollView>
+                            <!---->
+
+                            <!---->
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <com.displayfort.feedback.widgets.TextviewRegular
+                        android:id="@+id/submitDetail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="8dp"
+                        android:background="?selectableItemBackground"
+                        android:onClick="@{() -> viewModel.onLeaveComment()}"
+                        android:paddingLeft="18dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="18dp"
+                        android:paddingBottom="8dp"
+                        android:text="Leave your comment"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp"
+                        android:visibility="gone" />
+
+                    <com.displayfort.feedback.widgets.TextviewRegular
+                        android:id="@+id/shareTv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="8dp"
+                        android:background="?actionBarItemBackground"
+                        android:gravity="center_vertical|center_horizontal"
+                        android:onClick="@{() -> viewModel.onSubmit()}"
+                        android:paddingLeft="18dp"
+                        android:paddingTop="8dp"
+                        android:paddingRight="18dp"
+                        android:paddingBottom="8dp"
+                        android:text="Submit"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <android.support.v4.widget.ContentLoadingProgressBar
+            android:id="@+id/address_looking_up"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:indeterminateDrawable="@anim/rotate_anim"
+            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
+
+
+    </RelativeLayout>
+</layout>
