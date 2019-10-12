@@ -5,17 +5,19 @@ import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
+import android.os.Handler;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.RelativeLayout;
 
 import com.androidnetworking.error.ANError;
 import com.displayfort.feedback.BR;
@@ -24,7 +26,6 @@ import com.displayfort.feedback.ViewModelProviderFactory;
 import com.displayfort.feedback.data.model.api.ApiError;
 import com.displayfort.feedback.data.model.api.response.FeedBackResponse;
 import com.displayfort.feedback.databinding.ActivityFreedbackBinding;
-import com.displayfort.feedback.databinding.ItemFeedbackBinding;
 import com.displayfort.feedback.ui.base.BaseActivity;
 import com.displayfort.feedback.ui.login.LoginActivity;
 import com.displayfort.feedback.ui.thankyou.ThankyouActivity;
@@ -100,9 +101,10 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
                         public void onClick(View v) {
                             currentSelection = feedbcakDao.getFeed_back_ID();
                             onFeedbackClick(finalI);
-//                            suggestionAdapter.addItems(feedbcakDao.getFeed_back_question(), 2);
+                            mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
                             setFLowLayout(feedbcakDao.getFeed_back_question());
-                            mActivityFreedbackBinding.submitDetail.setVisibility(View.VISIBLE);
+                            showButtonVisibile(true);
+
                         }
                     });
                 }
@@ -117,9 +119,9 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
                         public void onClick(View v) {
                             currentSelection = feedbcakDao.getFeed_back_ID();
                             onFeedbackClick(finalI);
-//                            suggestionAdapter.addItems(feedbcakDao.getFeed_back_question(), 2);
+                            mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
                             setFLowLayout(feedbcakDao.getFeed_back_question());
-                            mActivityFreedbackBinding.submitDetail.setVisibility(View.VISIBLE);
+                            showButtonVisibile(true);
                         }
                     });
                 }
@@ -134,9 +136,9 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
                         public void onClick(View v) {
                             currentSelection = feedbcakDao.getFeed_back_ID();
                             onFeedbackClick(finalI);
-//                            suggestionAdapter.addItems(feedbcakDao.getFeed_back_question(), 2);
+                            mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
                             setFLowLayout(feedbcakDao.getFeed_back_question());
-                            mActivityFreedbackBinding.submitDetail.setVisibility(View.VISIBLE);
+                            showButtonVisibile(true);
                         }
                     });
                 }
@@ -151,9 +153,9 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
                         public void onClick(View v) {
                             currentSelection = feedbcakDao.getFeed_back_ID();
                             onFeedbackClick(finalI);
-//                            suggestionAdapter.addItems(feedbcakDao.getFeed_back_question(), 2);
+                            mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
                             setFLowLayout(feedbcakDao.getFeed_back_question());
-                            mActivityFreedbackBinding.submitDetail.setVisibility(View.VISIBLE);
+                            showButtonVisibile(true);
                         }
                     });
                 }
@@ -168,9 +170,9 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
                         public void onClick(View v) {
                             currentSelection = feedbcakDao.getFeed_back_ID();
                             onFeedbackClick(finalI);
-//                            suggestionAdapter.addItems(feedbcakDao.getFeed_back_question(), 2);
+                            mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
                             setFLowLayout(feedbcakDao.getFeed_back_question());
-                            mActivityFreedbackBinding.submitDetail.setVisibility(View.VISIBLE);
+                            showButtonVisibile(true);
                         }
                     });
                 }
@@ -180,7 +182,13 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
         }
     }
 
+    private void showButtonVisibile(boolean b) {
+        mActivityFreedbackBinding.submitDetail.setVisibility(View.VISIBLE);
+        mActivityFreedbackBinding.shareTv.setVisibility(View.VISIBLE);
+    }
+
     private void setFLowLayout(List<FeedBackResponse.SubDao> items) {
+        mActivityFreedbackBinding.feedbackHeader.setVisibility(View.VISIBLE);
         for (int i = 0; i < items.size(); i++) {
             items.get(i).setSelected(false);
 
@@ -251,7 +259,30 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
         super.onCreate(savedInstanceState);
         mActivityFreedbackBinding = getViewDataBinding();
         feedBackViewModel.setNavigator(this);
+        mActivityFreedbackBinding.detailSV.setVisibility(View.GONE);
         setUp();
+        setLayoutHW();
+
+    }
+
+    private void setLayoutHW() {
+        DisplayMetrics displayMetrics = Utility.getDisplayMetrix(this);
+        int height = displayMetrics.heightPixels;
+        int margin = (int) Utility.convertDpToPixel(20, this);
+        int width = (int) (displayMetrics.widthPixels - ((margin * 12) - (2 * getResources().getDimension(R.dimen.layout_margin))));
+        int finalwidth = width / 5;
+        mActivityFreedbackBinding.image1.setLayoutParams(new RelativeLayout.LayoutParams(finalwidth, finalwidth));
+        mActivityFreedbackBinding.image2.setLayoutParams(new RelativeLayout.LayoutParams(finalwidth, finalwidth));
+        mActivityFreedbackBinding.image3.setLayoutParams(new RelativeLayout.LayoutParams(finalwidth, finalwidth));
+        mActivityFreedbackBinding.image4.setLayoutParams(new RelativeLayout.LayoutParams(finalwidth, finalwidth));
+        mActivityFreedbackBinding.image5.setLayoutParams(new RelativeLayout.LayoutParams(finalwidth, finalwidth));
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        feedBackViewModel.getFeedbackQuestion();
     }
 
     private void setUp() {
@@ -266,11 +297,6 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
         mActivityFreedbackBinding.option3RL.setVisibility(View.GONE);
         mActivityFreedbackBinding.option4RL.setVisibility(View.GONE);
         mActivityFreedbackBinding.option5RL.setVisibility(View.GONE);
-//
-////        gridLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-//        mActivityFreedbackBinding.departmentRecycleView.setLayoutManager(gridLayoutManager);
-//        mActivityFreedbackBinding.departmentRecycleView.setItemAnimator(new DefaultItemAnimator());
-//        mActivityFreedbackBinding.departmentRecycleView.setAdapter(suggestionAdapter);
     }
 
 
@@ -302,7 +328,7 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
                 }
             }
             List<String> feedbacksublist = new ArrayList<>(feedback);
-            feedBackViewModel.getSubmitFeedback(currentSelection, feedbacksublist, "", "", "");
+            feedBackViewModel.getSubmitFeedback(currentSelection, feedbacksublist, comment, mobile, emailId);
         } else {
             Utility.ShowToast("Select one Option", this);
         }
@@ -374,6 +400,33 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
     @Override
     public void onLeaveComment() {
         mActivityFreedbackBinding.detailSV.setVisibility(View.VISIBLE);
+//        scrollToView(mActivityFreedbackBinding.detailSV);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                mActivityFreedbackBinding.detailSV.getParent().requestChildFocus(mActivityFreedbackBinding.detailSV, mActivityFreedbackBinding.detailSV);
+            }
+        }, 300);
+
+    }
+
+    private void scrollToView(final View view) {
+        // Get deepChild Offset
+        NestedScrollView scrollViewParent = mActivityFreedbackBinding.scrollview;
+        Point childOffset = new Point();
+        getDeepChildOffset(scrollViewParent, view.getParent(), view, childOffset);
+        // Scroll to child.
+        scrollViewParent.smoothScrollTo(0, childOffset.y);
+    }
+
+    private void getDeepChildOffset(final ViewGroup mainParent, final ViewParent parent, final View child, final Point accumulatedOffset) {
+        ViewGroup parentGroup = (ViewGroup) parent;
+        accumulatedOffset.x += child.getLeft();
+        accumulatedOffset.y += child.getTop();
+        if (parentGroup.equals(mainParent)) {
+            return;
+        }
+        getDeepChildOffset(mainParent, parentGroup.getParent(), parentGroup, accumulatedOffset);
     }
 
     @Override

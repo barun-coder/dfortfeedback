@@ -163,7 +163,6 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:layout_gravity="center"
-            android:indeterminateDrawable="@anim/rotate_anim"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
 
     </RelativeLayout>

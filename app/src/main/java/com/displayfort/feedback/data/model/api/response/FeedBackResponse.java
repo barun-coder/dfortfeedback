@@ -36,6 +36,9 @@ public final class FeedBackResponse {
         @Expose
         @SerializedName("feed_back_type_id")
         private String feed_back_ID;
+        @Expose
+        @SerializedName("feedback_type_header")
+        private String feedback_type_header;
 
         @Expose
         @SerializedName("feed_back_path")
@@ -59,6 +62,10 @@ public final class FeedBackResponse {
 
         public String getFeed_back_path() {
             return feed_back_path;
+        }
+
+        public String getFeedback_type_header() {
+            return feedback_type_header;
         }
 
         public List<SubDao> getFeed_back_question() {

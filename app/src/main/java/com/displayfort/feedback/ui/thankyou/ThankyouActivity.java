@@ -28,6 +28,7 @@ public class ThankyouActivity extends BaseActivity<ActivityThankyouBinding, Than
     ViewModelProviderFactory factory;
     ActivityThankyouBinding ActivityThankyouBinding;
     private ThankyouViewModel mSplashViewModel;
+    private boolean isAlreadyChanged = false;
 
     @Override
     public int getBindingVariable() {
@@ -66,6 +67,12 @@ public class ThankyouActivity extends BaseActivity<ActivityThankyouBinding, Than
         finish();
     }
 
+    @Override
+    public void onGoBack() {
+        isAlreadyChanged = true;
+        openMainActivity();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +82,9 @@ public class ThankyouActivity extends BaseActivity<ActivityThankyouBinding, Than
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                openMainActivity();
+                if (!isAlreadyChanged) {
+                    openMainActivity();
+                }
             }
         }, 6000);
 

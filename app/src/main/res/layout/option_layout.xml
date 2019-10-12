@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/optionLL"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:weightSum="5">
+
+    <RelativeLayout
+        android:id="@+id/detailSV"
+        android:layout_width="match_parent"
+
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="14dp"
+        android:background="@drawable/white_round_rect"
+        android:gravity="center_horizontal|center_vertical"
+        android:orientation="vertical"
+        android:padding="10dp"
+        android:visibility="visible">
+
+
+        <com.displayfort.feedback.widgets.EditextRegular
+            android:id="@+id/commentEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:gravity="top|left"
+            android:hint="Any Other Suggestion(Optional)"
+            android:lines="8"
+            android:maxLines="10"
+            android:minLines="4"
+            android:padding="12dp"
+            android:scrollbars="vertical"
+            android:textColor="#3E394F"
+            android:textColorHint="@color/textColorhint"
+            android:textSize="16sp"
+            app:backgroundTint="#3E394F" />
+
+        <com.displayfort.feedback.widgets.EditextRegular
+            android:id="@+id/mobileEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/commentEt"
+            android:layout_marginBottom="10dp"
+
+            android:gravity="center_vertical"
+            android:hint="Contact No.(Optional)"
+            android:inputType="number"
+            android:maxLength="10"
+            android:padding="12dp"
+            android:textColor="#3E394F"
+            android:textColorHint="@color/textColorhint"
+            android:textSize="16sp" />
+
+        <com.displayfort.feedback.widgets.EditextRegular
+            android:id="@+id/emailIdEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mobileEt"
+            android:layout_marginBottom="10dp"
+
+
+            android:gravity="center_vertical"
+            android:hint="Email Id (Optional)"
+            android:inputType="textEmailAddress"
+            android:maxLength="40"
+            android:padding="12dp"
+            android:textColor="#3E394F"
+            android:textColorHint="@color/textColorhint"
+            android:textSize="16sp" />
+
+        <com.displayfort.feedback.widgets.ButtonRegular
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@+id/emailIdEt"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="28dp"
+            android:background="?actionBarItemBackground"
+            android:gravity="center_vertical|center_horizontal"
+            android:onClick="@{() -> viewModel.onCancel()}"
+            android:text="Cancel"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

@@ -24,7 +24,7 @@ public class FeedBackViewModel extends BaseViewModel<FeedBackNavigator> {
 
     public FeedBackViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        getFeedbackQuestion();
+//        getFeedbackQuestion();
     }
 
 

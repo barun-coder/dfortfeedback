@@ -14,9 +14,10 @@
 
     <RelativeLayout
         android:id="@+id/activity_main"
+        android:background="?selectableItemBackground"
+        android:onClick="@{() -> viewModel.onGoBack()}"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin">
 
@@ -60,11 +61,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:padding="35dp"
+                    android:padding="45dp"
                     android:scaleType="centerInside"
                     android:src="@drawable/ic_df_logo" />
             </LinearLayout>
         </LinearLayout>
+
+        <com.displayfort.feedback.widgets.TextviewRegular
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="14sp"
+            android:layout_height="wrap_content"
+            android:text="Touch any where to go back"
+            android:layout_alignParentBottom="true"/>
     </RelativeLayout>
 
 </layout>

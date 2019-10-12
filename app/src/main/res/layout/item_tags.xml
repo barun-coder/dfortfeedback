@@ -35,7 +35,8 @@
                 android:paddingRight="10dp"
                 android:text="{viewModelviewModel. viewModelname}"
                 android:textColor="@drawable/radiobuttontextselector"
-                android:textSize="16sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
 
         </android.support.v7.widget.CardView>

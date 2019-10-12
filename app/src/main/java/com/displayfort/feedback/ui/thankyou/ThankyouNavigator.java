@@ -8,4 +8,5 @@ public interface ThankyouNavigator {
     void openMainActivity();
 
 
+    void onGoBack();
 }
