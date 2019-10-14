@@ -71,6 +71,13 @@ public final class LoginResponse {
         @SerializedName("user_id")
         private String user_id;
 
+        @Expose
+        @SerializedName("header_text")
+        private String header_text;
+        @Expose
+        @SerializedName("sub_header_text")
+        private String sub_header_text;
+
 
         public String getToken_code() {
             return token_code;
@@ -90,6 +97,14 @@ public final class LoginResponse {
 
         public String getCompany_name() {
             return company_name;
+        }
+
+        public String getHeader_text() {
+            return header_text;
+        }
+
+        public String getSub_header_text() {
+            return sub_header_text;
         }
     }
 }

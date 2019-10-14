@@ -65,34 +65,12 @@
                     android:layout_height="0dp"
                     android:layout_weight="2">
 
-                    <com.displayfort.feedback.widgets.TextviewBold
-                        android:id="@+id/heading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:inputType="textCapSentences"
-                        android:textColor="@color/black"
-                        android:textSize="68sp"
-                        android:textStyle="bold" />
-
-                    <com.displayfort.feedback.widgets.TextviewRegular
-                        android:id="@+id/subheading"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/heading"
-                        android:layout_centerHorizontal="true"
-                        android:inputType="textCapSentences"
-                        android:textColor="@color/black"
-                        android:textSize="30sp"
-                        android:textStyle="normal" />
-
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:scaleType="centerInside"
-                        android:src="@drawable/ic_customer_satisfaction"
-                        android:visibility="gone" />
+                        android:src="@drawable/ic_customer_satisfaction" />
                 </RelativeLayout>
             </LinearLayout>
             <!--Layout 2-->
@@ -134,12 +112,11 @@
                                     android:id="@+id/option1RL"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="4dp"
-                                    android:layout_marginRight="4dp"
                                     android:layout_weight="1"
                                     android:background="@drawable/smiley_bg_selector"
                                     android:orientation="vertical"
-                                    android:padding="8dp"
+                                    android:paddingLeft="11dp"
+                                    android:paddingRight="11dp"
                                     android:visibility="visible">
 
                                     <ImageView
@@ -147,9 +124,6 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerHorizontal="true"
-                                        android:layout_centerVertical="true"
-                                        android:padding="15dp"
-                                        android:scaleType="centerInside"
                                         android:src="@mipmap/smile" />
 
                                     <com.displayfort.feedback.widgets.TextviewBold
@@ -157,9 +131,9 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_below="@+id/image1"
+                                        android:layout_centerHorizontal="true"
                                         android:inputType="textCapSentences"
                                         android:padding="2dp"
-                                        android:layout_centerHorizontal="true"
                                         android:text="Answer"
                                         android:textColor="@color/black"
                                         android:textSize="20sp"
@@ -170,12 +144,12 @@
                                     android:id="@+id/option2RL"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="4dp"
-                                    android:layout_marginRight="4dp"
                                     android:layout_weight="1"
                                     android:background="@drawable/smiley_bg_selector"
                                     android:orientation="vertical"
                                     android:padding="8dp"
+                                    android:paddingLeft="11dp"
+                                    android:paddingRight="11dp"
                                     android:visibility="visible">
 
                                     <ImageView
@@ -183,8 +157,6 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerHorizontal="true"
-                                        android:layout_centerVertical="true"
-                                        android:padding="15dp"
                                         android:scaleType="centerInside"
                                         android:src="@mipmap/smile" />
 
@@ -205,12 +177,12 @@
                                     android:id="@+id/option3RL"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="4dp"
-                                    android:layout_marginRight="4dp"
                                     android:layout_weight="1"
                                     android:background="@drawable/smiley_bg_selector"
                                     android:orientation="vertical"
                                     android:padding="8dp"
+                                    android:paddingLeft="11dp"
+                                    android:paddingRight="11dp"
                                     android:visibility="visible">
 
                                     <ImageView
@@ -218,8 +190,6 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerHorizontal="true"
-                                        android:layout_centerVertical="true"
-                                        android:padding="15dp"
                                         android:scaleType="centerInside"
                                         android:src="@mipmap/smile" />
 
@@ -241,12 +211,12 @@
                                     android:id="@+id/option4RL"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="4dp"
-                                    android:layout_marginRight="4dp"
                                     android:layout_weight="1"
                                     android:background="@drawable/smiley_bg_selector"
                                     android:orientation="vertical"
                                     android:padding="8dp"
+                                    android:paddingLeft="11dp"
+                                    android:paddingRight="11dp"
                                     android:visibility="visible">
 
                                     <ImageView
@@ -254,8 +224,6 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerHorizontal="true"
-                                        android:layout_centerVertical="true"
-                                        android:padding="15dp"
                                         android:scaleType="centerInside"
                                         android:src="@mipmap/smile" />
 
@@ -276,12 +244,12 @@
                                     android:id="@+id/option5RL"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginLeft="4dp"
-                                    android:layout_marginRight="4dp"
                                     android:layout_weight="1"
                                     android:background="@drawable/smiley_bg_selector"
                                     android:orientation="vertical"
                                     android:padding="8dp"
+                                    android:paddingLeft="11dp"
+                                    android:paddingRight="11dp"
                                     android:visibility="visible">
 
                                     <ImageView
@@ -289,8 +257,6 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerHorizontal="true"
-                                        android:layout_centerVertical="true"
-                                        android:padding="15dp"
                                         android:scaleType="centerInside"
                                         android:src="@mipmap/smile" />
 

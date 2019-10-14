@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
+import android.text.Html;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.androidnetworking.error.ANError;
 import com.displayfort.feedback.BR;
 import com.displayfort.feedback.R;
 import com.displayfort.feedback.ViewModelProviderFactory;
+import com.displayfort.feedback.data.local.prefs.AppPreferencesHelper;
 import com.displayfort.feedback.data.model.api.ApiError;
 import com.displayfort.feedback.data.model.api.response.FeedBackResponse;
 import com.displayfort.feedback.databinding.ActivityFreedbackBinding;
@@ -286,7 +288,28 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
     }
 
     private void setUp() {
+        String header = getViewModel().getDataManager().getValue(AppPreferencesHelper.PREF_KEY_HEADER_TEXT).trim();
+        String subHeader = getViewModel().getDataManager().getValue(AppPreferencesHelper.PREF_KEY_SUB_HEADER_TEXT);
         String logoPath = getViewModel().getDataManager().getCurrentUserProfilePicUrl();
+
+        mActivityFreedbackBinding.subheading.setText(subHeader);
+        String h1 = "", h2 = "";
+
+        if (header.contains(" ")) {
+            String[] splitCount = header.split(" ");
+//            if(splitCount.length<=2) {
+            String[] splittext = header.split(" ", 2);
+            h1 = splittext[0] + " ";
+            h2 = splittext[1];
+
+        } else {
+            int dlt = header.length() / 2;
+            h1 = header.substring(0, dlt);
+            h2 = header.substring(dlt, header.length());
+        }
+
+        String text = "<font color=#F75666>" + h1 + "</font><font color=#000000>" + h2 + "</font>";
+        mActivityFreedbackBinding.heading.setText(Html.fromHtml(text));
 
         BindingUtils.setImageUrl(mActivityFreedbackBinding.companyLogo, AppConstants.IMAGEPATH + logoPath);
 

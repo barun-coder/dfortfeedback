@@ -4,6 +4,7 @@ package com.displayfort.feedback.data;
 import android.content.Context;
 
 import com.displayfort.feedback.data.local.db.DbHelper;
+import com.displayfort.feedback.data.local.prefs.AppPreferencesHelper;
 import com.displayfort.feedback.data.local.prefs.PreferencesHelper;
 import com.displayfort.feedback.data.model.api.request.FeedBackRequest;
 import com.displayfort.feedback.data.model.api.request.LoginRequest;
@@ -147,6 +148,16 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public void setValue(String key, String userName) {
+        mPreferencesHelper.setValue(key, userName);
+    }
+
+    @Override
+    public String getValue(String key) {
+        return mPreferencesHelper.getValue(key);
+    }
+
+    @Override
     public String getCurrentBgPath() {
         return mPreferencesHelper.getCurrentBgPath();
     }
@@ -271,8 +282,21 @@ public class AppDataManager implements DataManager {
         setCurrentUserName(userName);
         setCurrentBgPath(bgPath);
         setCurrentUserProfilePicUrl(profilePicPath);
-
         updateApiHeader(userId, accessToken);
+    }
+
+    @Override
+    public void updateLoginUserInfo(String accessToken, String userId, LoggedInMode loggedInMode, String userName,
+                                    String bgPath, String profilePicPath, String header_text, String sub_header_text) {
+        setAccessToken(accessToken);
+        setCurrentUserId(userId);
+        setCurrentUserLoggedInMode(loggedInMode);
+        setCurrentUserName(userName);
+        setCurrentBgPath(bgPath);
+        setCurrentUserProfilePicUrl(profilePicPath);
+        updateApiHeader(userId, accessToken);
+        setValue(AppPreferencesHelper.PREF_KEY_HEADER_TEXT, header_text);
+        setValue(AppPreferencesHelper.PREF_KEY_SUB_HEADER_TEXT, sub_header_text);
     }
 
 

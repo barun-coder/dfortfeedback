@@ -29,6 +29,10 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     private static final String PREF_KEY_USER_LOGGED_IN_MODE = "PREF_KEY_USER_LOGGED_IN_MODE";
 
+    public static final String PREF_KEY_HEADER_TEXT = "PREF_KEY_HEADER_TEXT";
+
+    public static final String PREF_KEY_SUB_HEADER_TEXT = "PREF_KEY_SUB_HEADER_TEXT";
+
     private final SharedPreferences mPrefs;
 
     @Inject
@@ -111,11 +115,22 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     @Override
     public String getCurrentBgPath() {
+
         return mPrefs.getString(PREF_KEY_CURRENT_BG_PIC_URL, null);
     }
 
     @Override
     public void setCurrentBgPath(String BGPath) {
         mPrefs.edit().putString(PREF_KEY_CURRENT_BG_PIC_URL, BGPath).apply();
+    }
+
+    @Override
+    public void setValue(String key, String userName) {
+        mPrefs.edit().putString(key, userName).apply();
+    }
+
+    @Override
+    public String getValue(String key) {
+        return mPrefs.getString(key, null);
     }
 }

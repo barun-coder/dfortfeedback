@@ -41,4 +41,7 @@ public interface PreferencesHelper {
     void setCurrentBgPath(String BGPath);
 
 
+    void setValue(String key, String userName);
+
+    String getValue(String key);
 }

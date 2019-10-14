@@ -49,7 +49,7 @@
                         android:layout_height="wrap_content"
                         android:padding="15dp"
                         android:scaleType="fitStart"
-                        android:src="@drawable/ic_df_logo" />
+                        android:src="@drawable/app_main_logo" />
                 </RelativeLayout>
 
 

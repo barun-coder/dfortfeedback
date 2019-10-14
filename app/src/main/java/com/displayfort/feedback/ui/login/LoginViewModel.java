@@ -40,7 +40,9 @@ public class LoginViewModel extends BaseViewModel<LoginNavigator> {
                                 DataManager.LoggedInMode.LOGGED_IN_MODE_SERVER,
                                 response.getData().getCompany_name(),
                                 response.getData().getBg_image(),
-                                response.getData().getLogo()
+                                response.getData().getLogo(),
+                                response.getData().getHeader_text(),
+                                response.getData().getSub_header_text()
                         ))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())

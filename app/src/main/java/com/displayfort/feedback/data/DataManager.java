@@ -53,6 +53,17 @@ public interface DataManager extends DbHelper, PreferencesHelper, ApiHelper {
             String profilePicPath
     );
 
+    void updateLoginUserInfo(
+            String accessToken,
+            String userId,
+            LoggedInMode loggedInMode,
+            String userName,
+            String bgPath,
+            String profilePicPath,
+            String header_text,
+            String sub_header_text
+    );
+
     void updateUserInfo(
             String accessToken,
             String userId,
