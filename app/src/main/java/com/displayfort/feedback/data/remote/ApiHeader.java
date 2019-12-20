@@ -43,7 +43,6 @@ public class ApiHeader {
         @SerializedName("api_key")
         private String mApiKey;
 
-
         @Expose
         @SerializedName("user_id")
         private String mUserId;

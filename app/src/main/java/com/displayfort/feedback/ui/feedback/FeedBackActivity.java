@@ -5,20 +5,33 @@ import android.app.Dialog;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.Html;
 import android.util.DisplayMetrics;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
 import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.error.ANError;
 import com.displayfort.feedback.BR;
@@ -27,8 +40,10 @@ import com.displayfort.feedback.ViewModelProviderFactory;
 import com.displayfort.feedback.data.local.prefs.AppPreferencesHelper;
 import com.displayfort.feedback.data.model.api.ApiError;
 import com.displayfort.feedback.data.model.api.response.FeedBackResponse;
+import com.displayfort.feedback.data.model.api.response.LangugeResponse;
 import com.displayfort.feedback.databinding.ActivityFreedbackBinding;
 import com.displayfort.feedback.ui.base.BaseActivity;
+import com.displayfort.feedback.ui.login.LicenseLoginActivity;
 import com.displayfort.feedback.ui.login.LoginActivity;
 import com.displayfort.feedback.ui.thankyou.ThankyouActivity;
 import com.displayfort.feedback.utils.AppConstants;
@@ -46,7 +61,7 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
-
+//https://rajeshandroiddeveloper.blogspot.com/2013/07/android-popupwindow-example-in-listview.html
 public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, FeedBackViewModel> implements FeedBackNavigator, OptionsAdapter.AdapterListener, OptionsAdapter.ResponseAdapterListener {
     @Inject
     OptionsAdapter suggestionAdapter;
@@ -59,6 +74,9 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
     private Set<String> feedback = new HashSet<>();
     private String currentSelection = "";
     private String comment = "", mobile = "", emailId = "";
+    private List<LangugeResponse.LangugeDao> languageList;
+    private PopupWindow popupWindowDogs;
+    public static String defaultLang = "en";
 
     public static Intent newIntent(Context context) {
         return new Intent(context, FeedBackActivity.class);
@@ -259,6 +277,8 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mActivityFreedbackBinding = getViewDataBinding();
         feedBackViewModel.setNavigator(this);
         mActivityFreedbackBinding.detailSV.setVisibility(View.GONE);
@@ -284,11 +304,11 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
     @Override
     protected void onStart() {
         super.onStart();
-        feedBackViewModel.getFeedbackQuestion();
+        feedBackViewModel.getFeedbackQuestion(defaultLang);
     }
 
     private void setUp() {
-        String header = getViewModel().getDataManager().getValue(AppPreferencesHelper.PREF_KEY_HEADER_TEXT).trim();
+        String header = getViewModel().getDataManager().getValue(AppPreferencesHelper.PREF_KEY_HEADER_TEXT);
         String subHeader = getViewModel().getDataManager().getValue(AppPreferencesHelper.PREF_KEY_SUB_HEADER_TEXT);
         String logoPath = getViewModel().getDataManager().getCurrentUserProfilePicUrl();
 
@@ -325,7 +345,7 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
 
     @Override
     public void openLoginActivity() {
-        Intent intent = LoginActivity.newIntent(this);
+        Intent intent = LicenseLoginActivity.newIntent(this);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
@@ -460,6 +480,79 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
         mActivityFreedbackBinding.emailIdEt.setText("");
     }
 
+    @Override
+    public void onChangeLang() {
+        if (languageList != null && languageList.size() > 0) {
+            popupWindowDogs.showAsDropDown(mActivityFreedbackBinding.selectLangLL, -5, 0);
+        }
+
+    }
+
+    @Override
+    public void showLanguageList(LangugeResponse response) {
+        languageList = response.getData();
+        languageList.add(0, new LangugeResponse.LangugeDao("en", "English"));
+        popupWindowDogs = popupWindowDogs();
+    }
+
+    public PopupWindow popupWindowDogs() {
+
+        // initialize a pop up window type
+        PopupWindow popupWindow = new PopupWindow(this);
+
+        // the drop down list is a list view
+        ListView listViewDogs = new ListView(this);
+
+        // set our adapter and pass our pop up window contents
+        listViewDogs.setAdapter(dogsAdapter(languageList));
+
+        // set the item click listener
+        listViewDogs.setOnItemClickListener(new DogsDropdownOnItemClickListener());
+
+        // some other visual settings
+        popupWindow.setFocusable(true);
+        popupWindow.setWidth(450);
+        popupWindow.setHeight(WindowManager.LayoutParams.WRAP_CONTENT);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            popupWindow.setBackgroundDrawable(getDrawable(R.color.white));
+        } else {
+            popupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.white));
+        }
+        // set the list view as pop up window content
+        popupWindow.setContentView(listViewDogs);
+
+        return popupWindow;
+    }
+
+    private ArrayAdapter dogsAdapter(List<LangugeResponse.LangugeDao> dogsArray) {
+
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.layout_poupul_view, dogsArray) {
+
+            @NonNull
+            @Override
+            public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+
+                if (convertView == null) {
+                    convertView = LayoutInflater.from(getContext()).inflate(R.layout.layout_poupul_view, parent, false);
+                }
+// setting the ID and text for every items in the list
+                LangugeResponse.LangugeDao text = (LangugeResponse.LangugeDao) getItem(position);
+// visual settings for the list item
+                TextView listItem = convertView.findViewById(R.id.text);
+                listItem.setText(text.getLang_name());
+                return convertView;
+            }
+        };
+        return adapter;
+    }
+
+    private void StartOnLangSelect(LangugeResponse.LangugeDao text) {
+        mActivityFreedbackBinding.selectLanguage.setText(text.getLang_name());
+        defaultLang = text.getLang_code();
+        feedBackViewModel.getFeedbackQuestion(defaultLang);
+    }
+
+
     private List<String> getFilterList(List<FeedBackResponse.SubDao> items) {
         List<String> subDaos = new ArrayList<>();
         for (FeedBackResponse.SubDao subDao : items) {
@@ -468,6 +561,32 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
             }
         }
         return subDaos;
+    }
+
+    public class DogsDropdownOnItemClickListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> arg0, View v, int arg2, long arg3) {
+
+            // get the context and main activity to access variables
+            Context mContext = v.getContext();
+            FeedBackActivity mainActivity = ((FeedBackActivity) mContext);
+
+            // add some animation when a list item was clicked
+            Animation fadeInAnimation = AnimationUtils.loadAnimation(v.getContext(), android.R.anim.fade_in);
+            fadeInAnimation.setDuration(10);
+            v.startAnimation(fadeInAnimation);
+
+            // dismiss the pop up
+            mainActivity.popupWindowDogs.dismiss();
+
+            StartOnLangSelect(languageList.get(arg2));
+
+            // get the text and set it as the button text
+
+
+        }
+
     }
 
     @Override

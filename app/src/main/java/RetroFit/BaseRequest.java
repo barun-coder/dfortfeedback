@@ -531,7 +531,7 @@ public class BaseRequest<T> extends BaseRequestParser {
         }
     }
 
-    public void callAPIPost(final int requestCode, JsonObject jsonObject, String remainingURL, String token_code) {
+    public void callAPIPost(final int requestCode, JsonObject jsonObject, String remainingURL, String token_code, String currentUserId) {
         isAlreadyTaken = false;
         RequestCode = requestCode;
         showLoader();
@@ -540,7 +540,7 @@ public class BaseRequest<T> extends BaseRequestParser {
         }
         Log.d("BaseReq", "Input URL : " + ApiClient.getClient().baseUrl() + remainingURL);
         logFullResponse(jsonObject.toString(), "INPUT");
-        callAPI = apiInterface.postData(remainingURL, jsonObject, token_code);
+        callAPI = apiInterface.postData(remainingURL, jsonObject, token_code,currentUserId);
         callAPI.enqueue(responseCallback);
 
     }

@@ -9,6 +9,7 @@ import com.displayfort.feedback.data.local.prefs.PreferencesHelper;
 import com.displayfort.feedback.data.model.api.request.FeedBackRequest;
 import com.displayfort.feedback.data.model.api.request.LoginRequest;
 import com.displayfort.feedback.data.model.api.response.FeedBackResponse;
+import com.displayfort.feedback.data.model.api.response.LangugeResponse;
 import com.displayfort.feedback.data.model.api.response.LoginResponse;
 import com.displayfort.feedback.data.model.api.response.LogoutResponse;
 import com.displayfort.feedback.data.model.db.Option;
@@ -69,8 +70,13 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Single<FeedBackResponse> doServergetFeedbackQuestion() {
-        return mApiHelper.doServergetFeedbackQuestion();
+    public Single<FeedBackResponse> doServergetFeedbackQuestion(String language) {
+        return mApiHelper.doServergetFeedbackQuestion(language);
+    }
+
+    @Override
+    public Single<LangugeResponse> doServergetLangugeList() {
+        return mApiHelper.doServergetLangugeList();
     }
 
     @Override
@@ -183,6 +189,10 @@ public class AppDataManager implements DataManager {
         return mDbHelper.getOptionsForQuestionId(questionId);
     }
 
+    @Override
+    public Single<LoginResponse> doLicenseCheckApiCall(LoginRequest.LicenseRequest request) {
+        return mApiHelper.doLicenseCheckApiCall(request);
+    }
 
     @Override
     public Observable<Boolean> insertUser(User user) {

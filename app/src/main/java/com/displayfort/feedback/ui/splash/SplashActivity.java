@@ -15,6 +15,7 @@ import com.displayfort.feedback.databinding.ActivitySplashBinding;
 import com.displayfort.feedback.ui.base.BaseActivity;
 import com.displayfort.feedback.ui.base.BaseAnimation;
 import com.displayfort.feedback.ui.feedback.FeedBackActivity;
+import com.displayfort.feedback.ui.login.LicenseLoginActivity;
 import com.displayfort.feedback.ui.login.LoginActivity;
 
 import javax.inject.Inject;
@@ -45,7 +46,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
 
     @Override
     public void openLoginActivity() {
-        Intent intent = LoginActivity.newIntent(SplashActivity.this);
+        Intent intent = LicenseLoginActivity.newIntent(SplashActivity.this);
         startActivity(intent);
         BaseAnimation.setAnimationTransition(this, BaseAnimation.EFFECT_TYPE.TAB_ZOOM);
         finish();

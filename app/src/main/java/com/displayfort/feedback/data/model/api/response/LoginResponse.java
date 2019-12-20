@@ -78,6 +78,77 @@ public final class LoginResponse {
         @SerializedName("sub_header_text")
         private String sub_header_text;
 
+        @Expose
+        @SerializedName("licence_id")
+        private String licence_id;
+        @Expose
+        @SerializedName("licence_code")
+        private String licence_code;
+        @Expose
+        @SerializedName("unique_id")
+        private String unique_id;
+        @Expose
+        @SerializedName("is_active")
+        private String is_active;
+        @Expose
+        @SerializedName("is_deleted")
+        private String is_deleted;
+        @Expose
+        @SerializedName("created_on")
+        private String created_on;
+        @Expose
+        @SerializedName("created_by")
+        private String created_by;
+        @Expose
+        @SerializedName("modify_on")
+        private String modify_on;
+        @Expose
+        @SerializedName("modify_by")
+        private String modify_by;
+        @Expose
+        @SerializedName("sub_user_id")
+        private String sub_user_id;
+
+
+        public String getLicence_id() {
+            return licence_id;
+        }
+
+        public String getLicence_code() {
+            return licence_code;
+        }
+
+        public String getUnique_id() {
+            return unique_id;
+        }
+
+        public String getIs_active() {
+            return is_active;
+        }
+
+        public String getIs_deleted() {
+            return is_deleted;
+        }
+
+        public String getCreated_on() {
+            return created_on;
+        }
+
+        public String getCreated_by() {
+            return created_by;
+        }
+
+        public String getModify_on() {
+            return modify_on;
+        }
+
+        public String getModify_by() {
+            return modify_by;
+        }
+
+        public String getSub_user_id() {
+            return sub_user_id;
+        }
 
         public String getToken_code() {
             return token_code;

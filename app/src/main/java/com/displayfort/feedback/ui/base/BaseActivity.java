@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.androidnetworking.error.ANError;
 import com.displayfort.feedback.R;
 import com.displayfort.feedback.data.DataManager;
+import com.displayfort.feedback.ui.login.LicenseLoginActivity;
 import com.displayfort.feedback.ui.login.LoginActivity;
 import com.displayfort.feedback.utils.CommonUtils;
 import com.displayfort.feedback.utils.NetworkUtils;
@@ -117,7 +118,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     }
 
     public void openActivityOnTokenExpire() {
-        startActivity(LoginActivity.newIntent(this));
+        startActivity(LicenseLoginActivity.newIntent(this));
         finish();
     }
 
@@ -217,7 +218,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends BaseView
     public void handleError(Throwable throwable) {
         if ((((ANError) throwable).getErrorCode()) == 401) {
             onLogout();
-            Intent intent = LoginActivity.newIntent(this);
+            Intent intent = LicenseLoginActivity.newIntent(this);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();

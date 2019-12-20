@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider;
 
 import com.displayfort.feedback.data.DataManager;
 import com.displayfort.feedback.ui.feedback.FeedBackViewModel;
+import com.displayfort.feedback.ui.login.LicenseLoginViewModel;
 import com.displayfort.feedback.ui.login.LoginViewModel;
 import com.displayfort.feedback.ui.splash.SplashViewModel;
 import com.displayfort.feedback.ui.thankyou.ThankyouViewModel;
@@ -39,7 +40,11 @@ public class ViewModelProviderFactory extends ViewModelProvider.NewInstanceFacto
         } else if (modelClass.isAssignableFrom(ThankyouViewModel.class)) {
             //noinspection unchecked
             return (T) new ThankyouViewModel(dataManager, schedulerProvider);
+        } else if (modelClass.isAssignableFrom(LicenseLoginViewModel.class)) {
+            //noinspection unchecked
+            return (T) new LicenseLoginViewModel(dataManager, schedulerProvider);
         }
+
 
         throw new IllegalArgumentException("Unknown ViewModel class: " + modelClass.getName());
     }

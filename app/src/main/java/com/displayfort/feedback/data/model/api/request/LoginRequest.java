@@ -29,6 +29,23 @@ public final class LoginRequest {
             this.user = user;
             this.password = password;
         }
+    }
+
+    public static class LicenseRequest {
+
+        @Expose
+        @SerializedName("licence_code")
+        private String licence_code;
+
+        @Expose
+        @SerializedName("unique_id")
+        private String unique_id;
+
+
+        public LicenseRequest(String licence_code, String unique_id) {
+            this.licence_code = licence_code;
+            this.unique_id = unique_id;
+        }
 
 
     }

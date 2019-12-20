@@ -24,14 +24,29 @@ public class FeedBackViewModel extends BaseViewModel<FeedBackNavigator> {
 
     public FeedBackViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-//        getFeedbackQuestion();
+        getLangugaeList();
     }
 
+    //multilingual/multilingual/getLanguage
+    public void getLangugaeList() {
+//        setIsLoading(true);
+        getCompositeDisposable().add(getDataManager()
+                .doServergetLangugeList()
+                .subscribeOn(getSchedulerProvider().io())
+                .observeOn(getSchedulerProvider().ui())
+                .subscribe(response -> {
+                    setIsLoading(false);
+                    getNavigator().showLanguageList(response);
+                }, throwable -> {
+                    setIsLoading(false);
+                    getNavigator().handleError(throwable);
+                }));
+    }
 
-    public void getFeedbackQuestion() {
+    public void getFeedbackQuestion(String language) {
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .doServergetFeedbackQuestion()
+                .doServergetFeedbackQuestion(language)
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(response -> {
@@ -89,7 +104,7 @@ public class FeedBackViewModel extends BaseViewModel<FeedBackNavigator> {
         Gson gson = gsonBuilder.create();
         JsonElement jsonObject = gson.toJsonTree(request);
 
-        baseRequest.callAPIPost(1, jsonObject.getAsJsonObject(), "feedback/feedback", getDataManager().getAccessToken());
+        baseRequest.callAPIPost(1, jsonObject.getAsJsonObject(), "feedback/feedback", getDataManager().getAccessToken(), getDataManager().getCurrentUserId());
     }
 
 
@@ -105,6 +120,10 @@ public class FeedBackViewModel extends BaseViewModel<FeedBackNavigator> {
 
     public void onSubmit() {
         getNavigator().onSubmit();
+    }
+
+    public void onChangeLang() {
+        getNavigator().onChangeLang();
     }
 
     public void onLeaveComment() {

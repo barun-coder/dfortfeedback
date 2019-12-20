@@ -22,7 +22,7 @@ public interface ApiInterface {
 
     @Headers({"Content-Type: application/json"})
     @POST
-    Call<JsonElement> postData(@Url String remainingURL, @Body JsonObject jsonObject, @Header("token_code") String session_key);
+    Call<JsonElement> postData(@Url String remainingURL, @Body JsonObject jsonObject, @Header("token_code") String session_key, @Header("user_id") String currentUserId);
 }
 
 

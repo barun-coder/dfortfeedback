@@ -4,6 +4,7 @@ package com.displayfort.feedback.data.remote;
 import com.displayfort.feedback.data.model.api.request.FeedBackRequest;
 import com.displayfort.feedback.data.model.api.request.LoginRequest;
 import com.displayfort.feedback.data.model.api.response.FeedBackResponse;
+import com.displayfort.feedback.data.model.api.response.LangugeResponse;
 import com.displayfort.feedback.data.model.api.response.LoginResponse;
 import com.displayfort.feedback.data.model.api.response.LogoutResponse;
 import com.displayfort.feedback.utils.AppConstants;
@@ -53,11 +54,19 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Single<FeedBackResponse> doServergetFeedbackQuestion() {
-        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_SERVER_FEEDBACK_QUESTION)
+    public Single<FeedBackResponse> doServergetFeedbackQuestion(String language) {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_SERVER_FEEDBACK_QUESTION + language)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(FeedBackResponse.class);
+    }
+
+    @Override
+    public Single<LangugeResponse> doServergetLangugeList() {
+        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_SERVER_GET_LANG_LIST)
+                .addHeaders(mApiHeader.getProtectedApiHeader())
+                .build()
+                .getObjectSingle(LangugeResponse.class);
     }
 
     @Override
@@ -67,6 +76,15 @@ public class AppApiHelper implements ApiHelper {
                 .addApplicationJsonBody(request)
                 .build()
                 .getObjectSingle(FeedBackResponse.class);
+    }
+
+    @Override
+    public Single<LoginResponse> doLicenseCheckApiCall(LoginRequest.LicenseRequest request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_SERVER_LICENSE)
+                .addHeaders(mApiHeader.getPublicApiHeader())
+                .addApplicationJsonBody(request)
+                .build()
+                .getObjectSingle(LoginResponse.class);
     }
 
     @Override

@@ -131,6 +131,6 @@ public class AppPreferencesHelper implements PreferencesHelper {
 
     @Override
     public String getValue(String key) {
-        return mPrefs.getString(key, null);
+        return mPrefs.getString(key, "");
     }
 }

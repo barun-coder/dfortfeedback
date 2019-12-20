@@ -4,6 +4,7 @@ package com.displayfort.feedback.di.builder;
 
 import com.displayfort.feedback.ui.feedback.FeedBackActivity;
 import com.displayfort.feedback.ui.feedback.FeedbackActivityModule;
+import com.displayfort.feedback.ui.login.LicenseLoginActivity;
 import com.displayfort.feedback.ui.login.LoginActivity;
 import com.displayfort.feedback.ui.splash.SplashActivity;
 import com.displayfort.feedback.ui.thankyou.ThankyouActivity;
@@ -20,6 +21,9 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector
     abstract LoginActivity bindLoginActivity();
+
+    @ContributesAndroidInjector
+    abstract LicenseLoginActivity bindLicenseLoginActivity();
 
     @ContributesAndroidInjector
     abstract SplashActivity bindSplashActivity();
