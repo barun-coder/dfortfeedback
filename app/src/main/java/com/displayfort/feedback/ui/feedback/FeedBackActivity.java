@@ -77,6 +77,7 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
     private List<LangugeResponse.LangugeDao> languageList;
     private PopupWindow popupWindowDogs;
     public static String defaultLang = "en";
+    private static String default_text = "English";
 
     public static Intent newIntent(Context context) {
         return new Intent(context, FeedBackActivity.class);
@@ -108,97 +109,106 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
     @Override
     public void showFeedback(FeedBackResponse response) {
         int totalcount = response.getTotal();
-        for (int i = 0; i < totalcount; i++) {
-            FeedBackResponse.FeedbackDao feedbcakDao = response.getData().get(i);
-            switch (i + 1) {
-                case 1: {
-                    mActivityFreedbackBinding.option1RL.setVisibility(View.VISIBLE);
-                    mActivityFreedbackBinding.feedtext1.setText(feedbcakDao.getFeed_back_type());
-                    BindingUtils.setImageUrl(mActivityFreedbackBinding.image1, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
-                    int finalI = i;
-                    mActivityFreedbackBinding.option1RL.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            currentSelection = feedbcakDao.getFeed_back_ID();
-                            onFeedbackClick(finalI);
-                            mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
-                            setFLowLayout(feedbcakDao.getFeed_back_question());
-                            showButtonVisibile(true);
+        if (totalcount > 0) {
+            for (int i = 0; i < totalcount; i++) {
+                FeedBackResponse.FeedbackDao feedbcakDao = response.getData().get(i);
+                switch (i + 1) {
+                    case 1: {
+                        mActivityFreedbackBinding.option1RL.setVisibility(View.VISIBLE);
+                        mActivityFreedbackBinding.feedtext1.setText(feedbcakDao.getFeed_back_type());
+                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image1, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
+                        int finalI = i;
+                        mActivityFreedbackBinding.option1RL.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                currentSelection = feedbcakDao.getFeed_back_ID();
+                                onFeedbackClick(finalI);
+                                mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
+                                setFLowLayout(feedbcakDao.getFeed_back_question());
+                                showButtonVisibile(true);
 
-                        }
-                    });
+                            }
+                        });
+                    }
+                    break;
+                    case 2: {
+                        mActivityFreedbackBinding.option2RL.setVisibility(View.VISIBLE);
+                        mActivityFreedbackBinding.feedtext2.setText(feedbcakDao.getFeed_back_type());
+                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image2, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
+                        int finalI = i;
+                        mActivityFreedbackBinding.option2RL.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                currentSelection = feedbcakDao.getFeed_back_ID();
+                                onFeedbackClick(finalI);
+                                mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
+                                setFLowLayout(feedbcakDao.getFeed_back_question());
+                                showButtonVisibile(true);
+                            }
+                        });
+                    }
+                    break;
+                    case 3: {
+                        mActivityFreedbackBinding.option3RL.setVisibility(View.VISIBLE);
+                        mActivityFreedbackBinding.feedtext3.setText(feedbcakDao.getFeed_back_type());
+                        int finalI = i;
+                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image3, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
+                        mActivityFreedbackBinding.option3RL.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                currentSelection = feedbcakDao.getFeed_back_ID();
+                                onFeedbackClick(finalI);
+                                mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
+                                setFLowLayout(feedbcakDao.getFeed_back_question());
+                                showButtonVisibile(true);
+                            }
+                        });
+                    }
+                    break;
+                    case 4: {
+                        mActivityFreedbackBinding.option4RL.setVisibility(View.VISIBLE);
+                        mActivityFreedbackBinding.feedtext4.setText(feedbcakDao.getFeed_back_type());
+                        int finalI = i;
+                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image4, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
+                        mActivityFreedbackBinding.option4RL.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                currentSelection = feedbcakDao.getFeed_back_ID();
+                                onFeedbackClick(finalI);
+                                mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
+                                setFLowLayout(feedbcakDao.getFeed_back_question());
+                                showButtonVisibile(true);
+                            }
+                        });
+                    }
+                    break;
+                    case 5: {
+                        mActivityFreedbackBinding.option5RL.setVisibility(View.VISIBLE);
+                        mActivityFreedbackBinding.feedtext5.setText(feedbcakDao.getFeed_back_type());
+                        int finalI = i;
+                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image5, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
+                        mActivityFreedbackBinding.option5RL.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                currentSelection = feedbcakDao.getFeed_back_ID();
+                                onFeedbackClick(finalI);
+                                mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
+                                setFLowLayout(feedbcakDao.getFeed_back_question());
+                                showButtonVisibile(true);
+                            }
+                        });
+                    }
+                    break;
                 }
-                break;
-                case 2: {
-                    mActivityFreedbackBinding.option2RL.setVisibility(View.VISIBLE);
-                    mActivityFreedbackBinding.feedtext2.setText(feedbcakDao.getFeed_back_type());
-                    BindingUtils.setImageUrl(mActivityFreedbackBinding.image2, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
-                    int finalI = i;
-                    mActivityFreedbackBinding.option2RL.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            currentSelection = feedbcakDao.getFeed_back_ID();
-                            onFeedbackClick(finalI);
-                            mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
-                            setFLowLayout(feedbcakDao.getFeed_back_question());
-                            showButtonVisibile(true);
-                        }
-                    });
-                }
-                break;
-                case 3: {
-                    mActivityFreedbackBinding.option3RL.setVisibility(View.VISIBLE);
-                    mActivityFreedbackBinding.feedtext3.setText(feedbcakDao.getFeed_back_type());
-                    int finalI = i;
-                    BindingUtils.setImageUrl(mActivityFreedbackBinding.image3, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
-                    mActivityFreedbackBinding.option3RL.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            currentSelection = feedbcakDao.getFeed_back_ID();
-                            onFeedbackClick(finalI);
-                            mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
-                            setFLowLayout(feedbcakDao.getFeed_back_question());
-                            showButtonVisibile(true);
-                        }
-                    });
-                }
-                break;
-                case 4: {
-                    mActivityFreedbackBinding.option4RL.setVisibility(View.VISIBLE);
-                    mActivityFreedbackBinding.feedtext4.setText(feedbcakDao.getFeed_back_type());
-                    int finalI = i;
-                    BindingUtils.setImageUrl(mActivityFreedbackBinding.image4, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
-                    mActivityFreedbackBinding.option4RL.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            currentSelection = feedbcakDao.getFeed_back_ID();
-                            onFeedbackClick(finalI);
-                            mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
-                            setFLowLayout(feedbcakDao.getFeed_back_question());
-                            showButtonVisibile(true);
-                        }
-                    });
-                }
-                break;
-                case 5: {
-                    mActivityFreedbackBinding.option5RL.setVisibility(View.VISIBLE);
-                    mActivityFreedbackBinding.feedtext5.setText(feedbcakDao.getFeed_back_type());
-                    int finalI = i;
-                    BindingUtils.setImageUrl(mActivityFreedbackBinding.image5, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
-                    mActivityFreedbackBinding.option5RL.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            currentSelection = feedbcakDao.getFeed_back_ID();
-                            onFeedbackClick(finalI);
-                            mActivityFreedbackBinding.feedbackHeader.setText(feedbcakDao.getFeedback_type_header());
-                            setFLowLayout(feedbcakDao.getFeed_back_question());
-                            showButtonVisibile(true);
-                        }
-                    });
-                }
-                break;
-
             }
+        } else {
+            mActivityFreedbackBinding.flowLayoutFl.removeAllViews();
+            suggestionAdapter.setResponseListener(this);
+            mActivityFreedbackBinding.option1RL.setVisibility(View.GONE);
+            mActivityFreedbackBinding.option2RL.setVisibility(View.GONE);
+            mActivityFreedbackBinding.option3RL.setVisibility(View.GONE);
+            mActivityFreedbackBinding.option4RL.setVisibility(View.GONE);
+            mActivityFreedbackBinding.option5RL.setVisibility(View.GONE);
         }
     }
 
@@ -304,6 +314,7 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
     @Override
     protected void onStart() {
         super.onStart();
+        mActivityFreedbackBinding.selectLanguage.setText(default_text);
         feedBackViewModel.getFeedbackQuestion(defaultLang);
     }
 
@@ -547,8 +558,9 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
     }
 
     private void StartOnLangSelect(LangugeResponse.LangugeDao text) {
-        mActivityFreedbackBinding.selectLanguage.setText(text.getLang_name());
         defaultLang = text.getLang_code();
+        default_text = text.getLang_name();
+        mActivityFreedbackBinding.selectLanguage.setText(default_text);
         feedBackViewModel.getFeedbackQuestion(defaultLang);
     }
 
