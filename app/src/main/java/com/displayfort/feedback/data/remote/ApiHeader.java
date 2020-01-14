@@ -9,12 +9,12 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Created by Yogesh  on 07/07/17.
+ * Created by Husain  on 07/07/17.
  */
 
 @Singleton
 public class ApiHeader {
-
+    public static String CUSTOM_BASE_URL = "";
     private ProtectedApiHeader mProtectedApiHeader;
 
     private PublicApiHeader mPublicApiHeader;

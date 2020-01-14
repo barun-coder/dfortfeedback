@@ -24,7 +24,7 @@ public class FeedBackViewModel extends BaseViewModel<FeedBackNavigator> {
 
     public FeedBackViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
-        getLangugaeList();
+//        getLangugaeList();
     }
 
     //multilingual/multilingual/getLanguage
@@ -61,17 +61,6 @@ public class FeedBackViewModel extends BaseViewModel<FeedBackNavigator> {
     public void getSubmitFeedback(String rating, List<String> user_feedback, String user_comment, String user_mobileno, String user_emailid) {
         setIsLoading(true);
         FeedBackRequest.feedbackReq request = new FeedBackRequest.feedbackReq(rating, user_feedback, user_comment, user_mobileno, user_emailid);
-//        getCompositeDisposable().add(getDataManager()
-//                .doServergetSubmitFeedback(request)
-//                .subscribeOn(getSchedulerProvider().io())
-//                .observeOn(getSchedulerProvider().ui())
-//                .subscribe(response -> {
-//                    setIsLoading(false);
-//                    getNavigator().onSuccessSubmit(response);
-//                }, throwable -> {
-//                    setIsLoading(false);
-//                    getNavigator().handleError(throwable);
-//                }));
         loginRequest(DfFeedBack.getContext(), request);
     }
 
@@ -99,12 +88,13 @@ public class FeedBackViewModel extends BaseViewModel<FeedBackNavigator> {
                 setIsLoading(false);
             }
         });
-
+        request.setUser_id(getDataManager().getCurrentUserId());
         GsonBuilder gsonBuilder = new GsonBuilder();
         Gson gson = gsonBuilder.create();
         JsonElement jsonObject = gson.toJsonTree(request);
 
-        baseRequest.callAPIPost(1, jsonObject.getAsJsonObject(), "feedback/feedback", getDataManager().getAccessToken(), getDataManager().getCurrentUserId());
+        baseRequest.callAPIPost(1, jsonObject.getAsJsonObject(), "feedback/feedback",
+                getDataManager().getAccessToken(), getDataManager().getCurrentUserId());
     }
 
 
@@ -113,6 +103,11 @@ public class FeedBackViewModel extends BaseViewModel<FeedBackNavigator> {
     }
 
     public void onLogout() {
+        getNavigator().onLogoutClick();
+
+    }
+
+    public void getLogout() {
         getDataManager().setUserAsLoggedOut();
         setIsLoading(false);
         getNavigator().openLoginActivity();

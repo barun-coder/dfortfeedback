@@ -38,7 +38,7 @@ public class AppApiHelper implements ApiHelper {
     @Override
     public Single<LogoutResponse> doLogoutApiCall() {
         //TODO
-        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_SERVER_LOGIN)
+        return Rx2AndroidNetworking.post(ApiHeader.CUSTOM_BASE_URL + ApiEndPoint.ENDPOINT_SERVER_LOGIN)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(LogoutResponse.class);
@@ -46,7 +46,7 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<LoginResponse> doServerLoginApiCall(LoginRequest.ServerLoginRequest request) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_SERVER_LOGIN)
+        return Rx2AndroidNetworking.post(ApiHeader.CUSTOM_BASE_URL + ApiEndPoint.ENDPOINT_SERVER_LOGIN)
                 .addHeaders(mApiHeader.getPublicApiHeader())
                 .addApplicationJsonBody(request)
                 .build()
@@ -55,7 +55,7 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<FeedBackResponse> doServergetFeedbackQuestion(String language) {
-        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_SERVER_FEEDBACK_QUESTION + language)
+        return Rx2AndroidNetworking.get(ApiHeader.CUSTOM_BASE_URL + ApiEndPoint.ENDPOINT_SERVER_FEEDBACK_QUESTION + language)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(FeedBackResponse.class);
@@ -63,7 +63,7 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<LangugeResponse> doServergetLangugeList() {
-        return Rx2AndroidNetworking.get(ApiEndPoint.ENDPOINT_SERVER_GET_LANG_LIST)
+        return Rx2AndroidNetworking.get(ApiHeader.CUSTOM_BASE_URL + ApiEndPoint.ENDPOINT_SERVER_GET_LANG_LIST)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .build()
                 .getObjectSingle(LangugeResponse.class);
@@ -71,7 +71,7 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<FeedBackResponse> doServergetSubmitFeedback(FeedBackRequest.feedbackReq request) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_SERVER_SUBMIT_FEEDBACK)
+        return Rx2AndroidNetworking.post(ApiHeader.CUSTOM_BASE_URL + ApiEndPoint.ENDPOINT_SERVER_SUBMIT_FEEDBACK)
                 .addHeaders(mApiHeader.getProtectedApiHeader())
                 .addApplicationJsonBody(request)
                 .build()
@@ -80,7 +80,7 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Single<LoginResponse> doLicenseCheckApiCall(LoginRequest.LicenseRequest request) {
-        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_SERVER_LICENSE)
+        return Rx2AndroidNetworking.post(ApiHeader.CUSTOM_BASE_URL + ApiEndPoint.ENDPOINT_SERVER_LICENSE)
                 .addHeaders(mApiHeader.getPublicApiHeader())
                 .addApplicationJsonBody(request)
                 .build()

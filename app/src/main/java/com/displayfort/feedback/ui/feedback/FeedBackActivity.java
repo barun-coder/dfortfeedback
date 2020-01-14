@@ -16,6 +16,7 @@ import android.support.v4.widget.NestedScrollView;
 import android.support.v7.widget.GridLayoutManager;
 import android.text.Html;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,7 @@ import android.widget.Toast;
 
 import com.androidnetworking.error.ANError;
 import com.displayfort.feedback.BR;
+import com.displayfort.feedback.NrFtPrefrence;
 import com.displayfort.feedback.R;
 import com.displayfort.feedback.ViewModelProviderFactory;
 import com.displayfort.feedback.data.local.prefs.AppPreferencesHelper;
@@ -108,6 +110,7 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
 
     @Override
     public void showFeedback(FeedBackResponse response) {
+        setElements(response);
         int totalcount = response.getTotal();
         if (totalcount > 0) {
             for (int i = 0; i < totalcount; i++) {
@@ -116,7 +119,7 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
                     case 1: {
                         mActivityFreedbackBinding.option1RL.setVisibility(View.VISIBLE);
                         mActivityFreedbackBinding.feedtext1.setText(feedbcakDao.getFeed_back_type());
-                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image1, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
+                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image1, new NrFtPrefrence(FeedBackActivity.this).getImageIP_ADDRESS() + feedbcakDao.getFeed_back_path());
                         int finalI = i;
                         mActivityFreedbackBinding.option1RL.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -134,7 +137,7 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
                     case 2: {
                         mActivityFreedbackBinding.option2RL.setVisibility(View.VISIBLE);
                         mActivityFreedbackBinding.feedtext2.setText(feedbcakDao.getFeed_back_type());
-                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image2, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
+                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image2, new NrFtPrefrence(FeedBackActivity.this).getImageIP_ADDRESS() + feedbcakDao.getFeed_back_path());
                         int finalI = i;
                         mActivityFreedbackBinding.option2RL.setOnClickListener(new View.OnClickListener() {
                             @Override
@@ -152,7 +155,7 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
                         mActivityFreedbackBinding.option3RL.setVisibility(View.VISIBLE);
                         mActivityFreedbackBinding.feedtext3.setText(feedbcakDao.getFeed_back_type());
                         int finalI = i;
-                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image3, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
+                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image3, new NrFtPrefrence(FeedBackActivity.this).getImageIP_ADDRESS() + feedbcakDao.getFeed_back_path());
                         mActivityFreedbackBinding.option3RL.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -169,7 +172,7 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
                         mActivityFreedbackBinding.option4RL.setVisibility(View.VISIBLE);
                         mActivityFreedbackBinding.feedtext4.setText(feedbcakDao.getFeed_back_type());
                         int finalI = i;
-                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image4, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
+                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image4, new NrFtPrefrence(FeedBackActivity.this).getImageIP_ADDRESS() + feedbcakDao.getFeed_back_path());
                         mActivityFreedbackBinding.option4RL.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -186,7 +189,7 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
                         mActivityFreedbackBinding.option5RL.setVisibility(View.VISIBLE);
                         mActivityFreedbackBinding.feedtext5.setText(feedbcakDao.getFeed_back_type());
                         int finalI = i;
-                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image5, AppConstants.IMAGEPATH + feedbcakDao.getFeed_back_path());
+                        BindingUtils.setImageUrl(mActivityFreedbackBinding.image5, new NrFtPrefrence(FeedBackActivity.this).getImageIP_ADDRESS() + feedbcakDao.getFeed_back_path());
                         mActivityFreedbackBinding.option5RL.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -212,9 +215,22 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
         }
     }
 
+    private void setElements(FeedBackResponse response) {
+        String header = response.getHeader_text();
+        String subHeader = response.getSub_header_text();
+        String logoPath = response.getLogo();
+        setCommonElements(header, subHeader, logoPath);
+        mActivityFreedbackBinding.submitDetail.setText(response.getLeave_comment_text());
+        mActivityFreedbackBinding.shareTv.setText(response.getSave_text());
+        mActivityFreedbackBinding.cancelBtn.setText(response.getCancel_btn());
+        mActivityFreedbackBinding.commentEt.setHint(response.getComment_hint());
+        mActivityFreedbackBinding.mobileEt.setHint(response.getMobile_hint());
+        mActivityFreedbackBinding.emailIdEt.setHint(response.getEmail_hint());
+    }
+
     private void showButtonVisibile(boolean b) {
-        mActivityFreedbackBinding.submitDetail.setVisibility(View.VISIBLE);
-        mActivityFreedbackBinding.shareTv.setVisibility(View.VISIBLE);
+        mActivityFreedbackBinding.submitDetail.setVisibility(b ? View.VISIBLE : View.GONE);
+        mActivityFreedbackBinding.shareTv.setVisibility(b ? View.VISIBLE : View.GONE);
     }
 
     private void setFLowLayout(List<FeedBackResponse.SubDao> items) {
@@ -316,34 +332,14 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
         super.onStart();
         mActivityFreedbackBinding.selectLanguage.setText(default_text);
         feedBackViewModel.getFeedbackQuestion(defaultLang);
+        feedBackViewModel.getLangugaeList();
     }
 
     private void setUp() {
         String header = getViewModel().getDataManager().getValue(AppPreferencesHelper.PREF_KEY_HEADER_TEXT);
         String subHeader = getViewModel().getDataManager().getValue(AppPreferencesHelper.PREF_KEY_SUB_HEADER_TEXT);
         String logoPath = getViewModel().getDataManager().getCurrentUserProfilePicUrl();
-
-        mActivityFreedbackBinding.subheading.setText(subHeader);
-        String h1 = "", h2 = "";
-
-        if (header.contains(" ")) {
-            String[] splitCount = header.split(" ");
-//            if(splitCount.length<=2) {
-            String[] splittext = header.split(" ", 2);
-            h1 = splittext[0] + " ";
-            h2 = splittext[1];
-
-        } else {
-            int dlt = header.length() / 2;
-            h1 = header.substring(0, dlt);
-            h2 = header.substring(dlt, header.length());
-        }
-
-        String text = "<font color=#F75666>" + h1 + "</font><font color=#000000>" + h2 + "</font>";
-        mActivityFreedbackBinding.heading.setText(Html.fromHtml(text));
-
-        BindingUtils.setImageUrl(mActivityFreedbackBinding.companyLogo, AppConstants.IMAGEPATH + logoPath);
-
+        setCommonElements(header, subHeader, logoPath);
         mActivityFreedbackBinding.flowLayoutFl.removeAllViews();
         suggestionAdapter.setResponseListener(this);
         mActivityFreedbackBinding.option1RL.setVisibility(View.GONE);
@@ -351,6 +347,38 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
         mActivityFreedbackBinding.option3RL.setVisibility(View.GONE);
         mActivityFreedbackBinding.option4RL.setVisibility(View.GONE);
         mActivityFreedbackBinding.option5RL.setVisibility(View.GONE);
+    }
+
+    private void setCommonElements(String header, String subHeader, String logoPath) {
+        if(subHeader!=null) {
+            mActivityFreedbackBinding.subheading.setText(subHeader);
+        }else{
+            mActivityFreedbackBinding.subheading.setText("");
+        }
+        String h1 = "", h2 = "";
+        if (header != null) {
+            if (header.contains(" ")) {
+                String[] splitCount = header.split(" ");
+//            if(splitCount.length<=2) {
+                String[] splittext = header.split(" ", 2);
+                h1 = splittext[0] + " ";
+                h2 = splittext[1];
+
+            } else {
+                int dlt = header.length() / 2;
+                h1 = header.substring(0, dlt);
+                h2 = header.substring(dlt, header.length());
+            }
+        }
+
+        String text = "<font color=#F75666>" + h1 + "</font><font color=#000000>" + h2 + "</font>";
+        mActivityFreedbackBinding.heading.setText(Html.fromHtml(text));
+        try {
+            BindingUtils.setImageUrl(mActivityFreedbackBinding.companyLogo, new NrFtPrefrence(FeedBackActivity.this).getImageIP_ADDRESS() + logoPath);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
 
@@ -499,6 +527,29 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
 
     }
 
+    int doubleBackToExitPressedOnce = 0;
+
+    @Override
+    public void onLogoutClick() {
+
+
+        if (doubleBackToExitPressedOnce == 2) {
+            Log.d("DOUBLETP", "NEW T VALUE:" + doubleBackToExitPressedOnce + "");
+            feedBackViewModel.getLogout();
+            return;
+        } else {
+            Log.d("DOUBLETP", "NEW F VALUE:" + doubleBackToExitPressedOnce + "");
+        }
+
+        ++this.doubleBackToExitPressedOnce;
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = 0;
+            }
+        }, 2000);
+    }
+
     @Override
     public void showLanguageList(LangugeResponse response) {
         languageList = response.getData();
@@ -561,6 +612,25 @@ public class FeedBackActivity extends BaseActivity<ActivityFreedbackBinding, Fee
         defaultLang = text.getLang_code();
         default_text = text.getLang_name();
         mActivityFreedbackBinding.selectLanguage.setText(default_text);
+        mActivityFreedbackBinding.option1RL.setSelected(false);
+        mActivityFreedbackBinding.option2RL.setSelected(false);
+        mActivityFreedbackBinding.option3RL.setSelected(false);
+        mActivityFreedbackBinding.option4RL.setSelected(false);
+        mActivityFreedbackBinding.option5RL.setSelected(false);
+        showButtonVisibile(false);
+        mActivityFreedbackBinding.flowLayoutFl.removeAllViews();
+        suggestionAdapter.setResponseListener(this);
+        mActivityFreedbackBinding.option1RL.setVisibility(View.GONE);
+        mActivityFreedbackBinding.option2RL.setVisibility(View.GONE);
+        mActivityFreedbackBinding.option3RL.setVisibility(View.GONE);
+        mActivityFreedbackBinding.option4RL.setVisibility(View.GONE);
+        mActivityFreedbackBinding.option5RL.setVisibility(View.GONE);
+
+        currentSelection = "";
+        mActivityFreedbackBinding.feedbackHeader.setText("");
+        mActivityFreedbackBinding.commentEt.setText("");
+        mActivityFreedbackBinding.mobileEt.setText("");
+        mActivityFreedbackBinding.emailIdEt.setText("");
         feedBackViewModel.getFeedbackQuestion(defaultLang);
     }
 

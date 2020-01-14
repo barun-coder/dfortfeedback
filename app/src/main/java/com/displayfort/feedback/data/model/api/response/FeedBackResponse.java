@@ -23,9 +23,41 @@ public final class FeedBackResponse {
     @SerializedName("total")
     private int total;
 
+    /**/
+    @Expose
+    @SerializedName("logo")
+    private String logo;
+    @Expose
+    @SerializedName("leave_comment_text")
+    private String leave_comment_text;
+
+    @Expose
+    @SerializedName("save_text")
+    private String save_text;
+    @Expose
+    @SerializedName("header_text")
+    private String header_text;
+    @Expose
+    @SerializedName("sub_header_text")
+    private String sub_header_text;
+    @Expose
+    @SerializedName("comment_hint")
+    private String comment_hint = "Any Other Suggestion(Optional)";
+    @Expose
+    @SerializedName("mobile_hint")
+    private String mobile_hint = "Contact No.(Optional)";
+    @Expose
+    @SerializedName("email_hint")
+    private String email_hint = "Email Id (Optional)";
+    @Expose
+    @SerializedName("cancel_btn")
+    private String cancel_btn = "Cancel";
+
 
     public static class FeedbackDao {
 
+
+        /**/
         @Expose
         @SerializedName("feed_back_question_count")
         private String feed_back_question_count;
@@ -113,5 +145,41 @@ public final class FeedBackResponse {
 
     public int getTotal() {
         return total;
+    }
+
+    public String getLogo() {
+        return logo;
+    }
+
+    public String getLeave_comment_text() {
+        return leave_comment_text;
+    }
+
+    public String getSave_text() {
+        return save_text;
+    }
+
+    public String getHeader_text() {
+        return header_text;
+    }
+
+    public String getSub_header_text() {
+        return sub_header_text;
+    }
+
+    public String getComment_hint() {
+        return comment_hint;
+    }
+
+    public String getMobile_hint() {
+        return mobile_hint;
+    }
+
+    public String getEmail_hint() {
+        return email_hint;
+    }
+
+    public String getCancel_btn() {
+        return cancel_btn;
     }
 }

@@ -36,12 +36,24 @@ public final class FeedBackRequest {
         @SerializedName("user_emailid")
         private String user_emailid;
 
+        @Expose
+        @SerializedName("user_id")
+        private String user_id;
+
         public feedbackReq(String rating, List<String> user_feedback, String user_comment, String user_mobileno, String user_emailid) {
             this.rating = rating;
             this.user_feedback = user_feedback;
             this.user_comment = user_comment;
             this.user_mobileno = user_mobileno;
             this.user_emailid = user_emailid;
+        }
+
+        public String getUser_id() {
+            return user_id;
+        }
+
+        public void setUser_id(String user_id) {
+            this.user_id = user_id;
         }
 
         public String getRating() {

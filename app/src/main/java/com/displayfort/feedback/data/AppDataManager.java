@@ -3,6 +3,7 @@ package com.displayfort.feedback.data;
 
 import android.content.Context;
 
+import com.displayfort.feedback.NrFtPrefrence;
 import com.displayfort.feedback.data.local.db.DbHelper;
 import com.displayfort.feedback.data.local.prefs.AppPreferencesHelper;
 import com.displayfort.feedback.data.local.prefs.PreferencesHelper;
@@ -35,7 +36,7 @@ import io.reactivex.Observable;
 import io.reactivex.Single;
 
 /**
- * Created by Yogesh  on 07/07/17.
+ * Created by Husain  on 07/07/17.
  */
 @Singleton
 public class AppDataManager implements DataManager {
@@ -61,26 +62,31 @@ public class AppDataManager implements DataManager {
 
     @Override
     public Single<LogoutResponse> doLogoutApiCall() {
+        ApiHeader.CUSTOM_BASE_URL = new NrFtPrefrence(mContext).getIP_ADDRESS();
         return mApiHelper.doLogoutApiCall();
     }
 
     @Override
     public Single<LoginResponse> doServerLoginApiCall(LoginRequest.ServerLoginRequest request) {
+        ApiHeader.CUSTOM_BASE_URL = new NrFtPrefrence(mContext).getIP_ADDRESS();
         return mApiHelper.doServerLoginApiCall(request);
     }
 
     @Override
     public Single<FeedBackResponse> doServergetFeedbackQuestion(String language) {
+        ApiHeader.CUSTOM_BASE_URL = new NrFtPrefrence(mContext).getIP_ADDRESS();
         return mApiHelper.doServergetFeedbackQuestion(language);
     }
 
     @Override
     public Single<LangugeResponse> doServergetLangugeList() {
+        ApiHeader.CUSTOM_BASE_URL = new NrFtPrefrence(mContext).getIP_ADDRESS();
         return mApiHelper.doServergetLangugeList();
     }
 
     @Override
     public Single<FeedBackResponse> doServergetSubmitFeedback(FeedBackRequest.feedbackReq request) {
+        ApiHeader.CUSTOM_BASE_URL = new NrFtPrefrence(mContext).getIP_ADDRESS();
         return mApiHelper.doServergetSubmitFeedback(request);
     }
 
@@ -131,6 +137,7 @@ public class AppDataManager implements DataManager {
     @Override
     public void setCurrentUserId(String userId) {
         mPreferencesHelper.setCurrentUserId(userId);
+        mApiHelper.getApiHeader().getProtectedApiHeader().setUserId(userId);
     }
 
     @Override
@@ -191,6 +198,7 @@ public class AppDataManager implements DataManager {
 
     @Override
     public Single<LoginResponse> doLicenseCheckApiCall(LoginRequest.LicenseRequest request) {
+        ApiHeader.CUSTOM_BASE_URL = new NrFtPrefrence(mContext).getIP_ADDRESS();
         return mApiHelper.doLicenseCheckApiCall(request);
     }
 

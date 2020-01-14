@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/gray"
     android:padding="1px">
 
-    <TextView
-        android:id="@+id/text"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:padding="8dp"
-        android:text="qaawsdc"
-        android:textColor="#898989"
-        android:textSize="16sp" />
+        android:background="@color/white">
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="qaawsdc"
+            android:textColor="#898989"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+</RelativeLayout>

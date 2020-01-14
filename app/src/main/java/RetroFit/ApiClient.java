@@ -1,6 +1,9 @@
 package RetroFit;
 
+import android.content.Context;
+
 import com.displayfort.feedback.BuildConfig;
+import com.displayfort.feedback.NrFtPrefrence;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -22,13 +25,13 @@ public class ApiClient {
     private static Retrofit posting_APIClient = null;
 
     // http://192.168.5.147
-    public static Retrofit getClient() {
+    public static Retrofit getClient(Context mContext) {
         if (posting_APIClient == null) {
             Gson gson = new GsonBuilder()
                     .setLenient()
                     .create();
             posting_APIClient = new Retrofit.Builder()
-                    .baseUrl(BASE_URL)
+                    .baseUrl(new NrFtPrefrence(mContext).getIP_ADDRESS())
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .client(getHttpClient())
                     .build();

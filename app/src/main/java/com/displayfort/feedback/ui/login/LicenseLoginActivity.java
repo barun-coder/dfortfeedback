@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import com.androidnetworking.error.ANError;
 import com.displayfort.feedback.BR;
+import com.displayfort.feedback.NrFtPrefrence;
 import com.displayfort.feedback.R;
 import com.displayfort.feedback.ViewModelProviderFactory;
 import com.displayfort.feedback.data.model.api.ApiError;
@@ -71,10 +72,12 @@ public class LicenseLoginActivity extends BaseActivity<ActivityLicenseLoginBindi
     @Override
     public void login() {
         String identifierId = mActivityLicenseLoginBinding.identifier.getText().toString();
+        String IpAddress = mActivityLicenseLoginBinding.username.getText().toString();
         String licensekey = mActivityLicenseLoginBinding.password.getText().toString();
-        int validation = mLicenseLoginViewModel.isEmailAndPasswordValid(identifierId, licensekey);
+        int validation = mLicenseLoginViewModel.isEmailAndPasswordValid(identifierId, licensekey, IpAddress);
         if (validation == 0) {
             hideKeyboard();
+            new NrFtPrefrence(this).setIP_ADDRESS(IpAddress);
             mLicenseLoginViewModel.liscensreCheck(identifierId, licensekey);
         } else {
             setError(validation);
@@ -85,7 +88,10 @@ public class LicenseLoginActivity extends BaseActivity<ActivityLicenseLoginBindi
     private void setError(int validation) {
         switch (validation) {
             case 1:
-                mActivityLicenseLoginBinding.username.setError("Please enter identifier Id");
+                mActivityLicenseLoginBinding.username.setError("Please enter Unique Id");
+                break;
+            case 3:
+                mActivityLicenseLoginBinding.username.setError("Please enter IP address");
                 break;
             case 2:
                 mActivityLicenseLoginBinding.password.setError("Please enter License key ");
@@ -102,14 +108,14 @@ public class LicenseLoginActivity extends BaseActivity<ActivityLicenseLoginBindi
 
     @Override
     public void openMainActivity(LoginResponse.UserDao data) {
-//        if (data.getSub_user_id() != null && !data.getSub_user_id().equals("")) {
-            Intent intent = FeedBackActivity.newIntent(LicenseLoginActivity.this);
-            startActivity(intent);
-            BaseAnimation.setAnimationTransition(this, BaseAnimation.EFFECT_TYPE.TAB_ZOOM);
-            finish();
-//        } else {
-//            DialogUtils.showAlertDialog(this, "Account not yet complete\nPlease contact Admin for more detail");
-//        }
+        if (data.getSub_user_id() != null && !data.getSub_user_id().equals("")) {
+        Intent intent = FeedBackActivity.newIntent(LicenseLoginActivity.this);
+        startActivity(intent);
+        BaseAnimation.setAnimationTransition(this, BaseAnimation.EFFECT_TYPE.TAB_ZOOM);
+        finish();
+        } else {
+            DialogUtils.showAlertDialog(this, "Account not yet complete\nPlease contact Admin for more detail");
+        }
     }
 
 
@@ -129,7 +135,7 @@ public class LicenseLoginActivity extends BaseActivity<ActivityLicenseLoginBindi
         mActivityLicenseLoginBinding = getViewDataBinding();
         mLicenseLoginViewModel.setNavigator(this);
         mActivityLicenseLoginBinding.identifier.setVisibility(View.VISIBLE);
-        mActivityLicenseLoginBinding.username.setVisibility(View.GONE);
+        mActivityLicenseLoginBinding.username.setVisibility(View.VISIBLE);
         mActivityLicenseLoginBinding.password.setHint("Enter License key");
         getUniqueNumberPermision();
         mActivityLicenseLoginBinding.password.setOnEditorActionListener(new TextView.OnEditorActionListener() {

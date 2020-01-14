@@ -81,7 +81,7 @@ public class BaseRequest<T> extends BaseRequestParser {
         mContext = context;
 
         apiInterface =
-                ApiClient.getClient().create(ApiInterface.class);
+                ApiClient.getClient(mContext).create(ApiInterface.class);
         if (context != null && !runInBackground) {
             dialog = getProgressesDialog(context);
         }
@@ -102,7 +102,7 @@ public class BaseRequest<T> extends BaseRequestParser {
         mContext = context;
         this.runInBackground = runInBackground;
         apiInterface =
-                ApiClient.getClient().create(ApiInterface.class);
+                ApiClient.getClient(context).create(ApiInterface.class);
         if (context != null && !runInBackground) {
             dialog = getProgressesDialog(context);
         }
@@ -128,7 +128,7 @@ public class BaseRequest<T> extends BaseRequestParser {
     public BaseRequest(Context context, Fragment fragment) {
         mContext = context;
         this.fragment = fragment;
-        apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        apiInterface = ApiClient.getClient(context).create(ApiInterface.class);
         if (context != null && !runInBackground) {
             dialog = getProgressesDialog(context);
         }
@@ -531,16 +531,18 @@ public class BaseRequest<T> extends BaseRequestParser {
         }
     }
 
-    public void callAPIPost(final int requestCode, JsonObject jsonObject, String remainingURL, String token_code, String currentUserId) {
+    public void callAPIPost(final int requestCode, JsonObject jsonObject, String remainingURL,
+                            String token_code, String currentUserId) {
         isAlreadyTaken = false;
         RequestCode = requestCode;
         showLoader();
         if (jsonObject == null) {
             jsonObject = new JsonObject();
         }
-        Log.d("BaseReq", "Input URL : " + ApiClient.getClient().baseUrl() + remainingURL);
+        Log.d("BaseReq", "Input URL : " + ApiClient.getClient(mContext).baseUrl() + remainingURL);
         logFullResponse(jsonObject.toString(), "INPUT");
-        callAPI = apiInterface.postData(remainingURL, jsonObject, token_code,currentUserId);
+        callAPI = apiInterface.postData(remainingURL, jsonObject, token_code, currentUserId);
+        Log.d("BaseReq", "Header " + callAPI.request().headers().toString());
         callAPI.enqueue(responseCallback);
 
     }

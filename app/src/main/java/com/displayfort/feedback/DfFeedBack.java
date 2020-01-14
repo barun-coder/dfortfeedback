@@ -10,6 +10,7 @@ import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.interceptors.HttpLoggingInterceptor;
 import com.displayfort.feedback.di.component.DaggerAppComponent;
 import com.displayfort.feedback.utils.AppLogger;
+import com.splunk.mint.Mint;
 
 import javax.inject.Inject;
 
@@ -38,7 +39,8 @@ public class DfFeedBack extends Application implements HasActivityInjector {
     @Override
     public void onCreate() {
         super.onCreate();
-//        Mint.initAndStartSession(this, "3ec84e46");
+//        Mint.initAndtartSession(this, "4c7c74b7");
+        Mint.initAndStartSession(this, "4c7c74b7");
         DfFeedBack.context = getApplicationContext();
         DaggerAppComponent.builder()
                 .application(this)

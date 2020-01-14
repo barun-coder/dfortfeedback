@@ -25,5 +25,7 @@ public interface FeedBackNavigator extends BaseNavigator {
 
     void onChangeLang();
 
+    void onLogoutClick();
+
     void showLanguageList(LangugeResponse response);
 }
